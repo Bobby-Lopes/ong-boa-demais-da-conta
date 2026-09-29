@@ -28,11 +28,16 @@
             type="button"
             aria-label="Abrir menu"
             aria-expanded="false"
+            aria-controls="menu-principal"
         >
             ☰
         </button>
 
-        <nav class="menu-principal">
+        <nav
+            class="menu-principal"
+            id="menu-principal"
+            aria-label="Navegação principal"
+        >
             <ul>
                 <li>
                     <a href="#inicio" data-rota="inicio">
@@ -71,10 +76,22 @@
                 </li>
             </ul>
         </nav>
+
+        <button
+            class="botao-tema"
+            type="button"
+            aria-label="Ativar modo escuro"
+            aria-pressed="false"
+        >
+            🌙 Modo escuro
+        </button>
     </header>
 
     <!-- Conteúdo da SPA será renderizado aqui -->
-    <main id="conteudo-principal"></main>
+    <main
+        id="conteudo-principal"
+        tabindex="-1"
+    ></main>
 
     <!-- Modal utilizado pelos projetos -->
     <div
@@ -83,6 +100,7 @@
         role="dialog"
         aria-modal="true"
         aria-labelledby="modal-titulo"
+        aria-describedby="modal-texto"
         hidden
     >
         <div class="modal-conteudo">
