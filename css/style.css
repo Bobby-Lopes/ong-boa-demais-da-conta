@@ -1,0 +1,461 @@
+:root {
+    /* Paleta de cores */
+    --cor-primaria: #2364aa;
+    --cor-primaria-escura: #174574;
+    --cor-secundaria: #3a7d44;
+    --cor-destaque: #f2c14e;
+    --cor-fundo: #f4f4f4;
+    --cor-superficie: #ffffff;
+    --cor-texto: #333333;
+    --cor-rodape: #222222;
+
+    /* Escala tipográfica */
+    --fonte-1: 2rem;
+    --fonte-2: 1.5rem;
+    --fonte-3: 1.25rem;
+    --fonte-4: 1rem;
+    --fonte-5: 0.875rem;
+
+    /* Escala de espaçamento */
+    --espaco-1: 4px;
+    --espaco-2: 8px;
+    --espaco-3: 16px;
+    --espaco-4: 24px;
+    --espaco-5: 32px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    font-size: var(--fonte-4);
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+}
+
+header {
+    position: relative;
+    background-color: var(--cor-primaria);
+    color: var(--cor-superficie);
+    padding: var(--espaco-3);
+}
+
+header h1 {
+    font-size: var(--fonte-1);
+    margin: 0 60px var(--espaco-3) 0;
+}
+
+h2 {
+    font-size: var(--fonte-2);
+}
+
+h3 {
+    font-size: var(--fonte-3);
+}
+
+p,
+a,
+label,
+input,
+textarea,
+button {
+    font-size: var(--fonte-4);
+}
+
+small {
+    font-size: var(--fonte-5);
+}
+
+/* Menu hambúrguer */
+.menu-hamburguer {
+    position: absolute;
+    top: var(--espaco-3);
+    right: var(--espaco-3);
+    padding: var(--espaco-2) var(--espaco-3);
+    background-color: var(--cor-primaria-escura);
+    color: var(--cor-superficie);
+    border: none;
+    border-radius: var(--espaco-1);
+    cursor: pointer;
+}
+
+.menu-principal {
+    display: none;
+}
+
+.menu-principal.ativo {
+    display: block;
+}
+
+/* Flexbox no menu */
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaco-2);
+}
+
+nav a {
+    display: block;
+    color: var(--cor-superficie);
+    text-decoration: none;
+    padding: var(--espaco-2);
+    border-radius: var(--espaco-1);
+    transition: background-color 0.3s ease;
+}
+
+nav a:hover,
+nav a:focus {
+    background-color: var(--cor-primaria-escura);
+}
+
+/* Submenu */
+.submenu {
+    display: none;
+    padding-left: var(--espaco-3);
+}
+
+.dropdown:hover .submenu,
+.dropdown:focus-within .submenu {
+    display: flex;
+}
+
+/* Foco para acessibilidade */
+a:focus,
+button:focus,
+input:focus,
+textarea:focus {
+    outline: 3px solid var(--cor-destaque);
+    outline-offset: 2px;
+}
+
+/* Grid principal */
+main {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    padding: var(--espaco-3);
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--espaco-3);
+}
+
+section {
+    grid-column: span 12;
+    background-color: var(--cor-superficie);
+    padding: var(--espaco-3);
+    border-radius: var(--espaco-2);
+}
+
+article {
+    margin-bottom: var(--espaco-3);
+}
+
+/* Projetos */
+.projetos-container {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--espaco-3);
+}
+
+.projeto {
+    grid-column: span 12;
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaco-2);
+    padding: var(--espaco-3);
+    background-color: var(--cor-fundo);
+    border-radius: var(--espaco-2);
+}
+
+.projeto button {
+    align-self: flex-start;
+}
+
+/* Badges */
+.badge {
+    align-self: flex-start;
+    display: inline-block;
+    padding: var(--espaco-1) var(--espaco-2);
+    background-color: var(--cor-primaria);
+    color: var(--cor-superficie);
+    border-radius: var(--espaco-3);
+    font-size: var(--fonte-5);
+    font-weight: bold;
+}
+
+/* Formulário */
+form div {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaco-1);
+}
+
+input,
+textarea {
+    width: 100%;
+    max-width: 500px;
+    padding: var(--espaco-2);
+    margin-top: var(--espaco-1);
+    border: 2px solid #777777;
+    border-radius: var(--espaco-1);
+}
+
+/* Estados de validação */
+.campo-valido {
+    border-color: var(--cor-secundaria);
+}
+
+.campo-invalido {
+    border-color: #b42318;
+}
+
+.mensagem-erro {
+    display: block;
+    margin-top: var(--espaco-1);
+    color: #b42318;
+}
+
+.mensagem-formulario {
+    margin-top: var(--espaco-3);
+    font-weight: bold;
+}
+
+.mensagem-formulario.erro {
+    color: #b42318;
+}
+
+.mensagem-formulario.sucesso {
+    color: var(--cor-secundaria);
+}
+
+/* Botões */
+button {
+    padding: var(--espaco-2) var(--espaco-3);
+    background-color: var(--cor-secundaria);
+    color: var(--cor-superficie);
+    border: none;
+    border-radius: var(--espaco-1);
+    cursor: pointer;
+    transition:
+        background-color 0.3s ease,
+        transform 0.2s ease,
+        opacity 0.3s ease;
+}
+
+button:hover {
+    background-color: var(--cor-primaria-escura);
+}
+
+button:focus {
+    outline: 3px solid var(--cor-destaque);
+    outline-offset: 2px;
+}
+
+button:active {
+    transform: scale(0.97);
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Alerta */
+.alerta {
+    margin-top: var(--espaco-3);
+    padding: var(--espaco-3);
+    background-color: #fff4cc;
+    border-left: 5px solid var(--cor-destaque);
+    border-radius: var(--espaco-1);
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--espaco-3);
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.modal[hidden] {
+    display: none;
+}
+
+.modal-conteudo {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    padding: var(--espaco-5);
+    background-color: var(--cor-superficie);
+    color: var(--cor-texto);
+    border-radius: var(--espaco-2);
+}
+
+.modal-fechar {
+    position: absolute;
+    top: var(--espaco-2);
+    right: var(--espaco-2);
+}
+
+/* Toast */
+.toast {
+    position: fixed;
+    right: var(--espaco-3);
+    bottom: var(--espaco-3);
+    z-index: 110;
+    max-width: 320px;
+    padding: var(--espaco-3);
+    background-color: var(--cor-secundaria);
+    color: var(--cor-superficie);
+    border-radius: var(--espaco-2);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease,
+        visibility 0.3s ease;
+}
+
+.toast.ativo {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+section img {
+    width: 100%;
+    max-width: 500px;
+    height: 300px;
+    object-fit: cover;
+    margin: 0 auto;
+    display: block;
+}
+
+footer {
+    background-color: var(--cor-rodape);
+    color: var(--cor-superficie);
+    text-align: center;
+    padding: var(--espaco-4);
+}
+
+/* Breakpoint 1 - celulares maiores */
+@media (min-width: 480px) {
+    header {
+        padding: var(--espaco-4);
+    }
+
+    .menu-hamburguer {
+        top: var(--espaco-4);
+        right: var(--espaco-4);
+    }
+
+    main {
+        padding: var(--espaco-4);
+    }
+
+    section {
+        padding: var(--espaco-4);
+    }
+}
+
+/* Breakpoint 2 - tablets */
+@media (min-width: 768px) {
+    .menu-hamburguer {
+        display: none;
+    }
+
+    .menu-principal {
+        display: block;
+    }
+
+    nav ul {
+        flex-direction: row;
+        gap: var(--espaco-4);
+    }
+
+    .dropdown {
+        position: relative;
+    }
+
+    .submenu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        min-width: 220px;
+        padding: var(--espaco-2);
+        background-color: var(--cor-primaria-escura);
+        flex-direction: column;
+        gap: var(--espaco-1);
+        z-index: 10;
+    }
+
+    .dropdown:hover .submenu,
+    .dropdown:focus-within .submenu {
+        display: flex;
+    }
+
+    .projeto {
+        grid-column: span 6;
+    }
+
+    main {
+        gap: var(--espaco-4);
+    }
+}
+
+/* Breakpoint 3 - desktops */
+@media (min-width: 1024px) {
+    main {
+        padding: var(--espaco-5);
+    }
+
+    .projeto {
+        grid-column: span 4;
+    }
+
+    header h1 {
+        font-size: 2.25rem;
+    }
+}
+
+/* Breakpoint 4 - desktops grandes */
+@media (min-width: 1280px) {
+    main {
+        max-width: 1200px;
+    }
+
+    section {
+        padding: var(--espaco-5);
+    }
+
+    .projetos-container {
+        gap: var(--espaco-4);
+    }
+}
+
+/* Breakpoint 5 - telas panorâmicas */
+@media (min-width: 1600px) {
+    main {
+        max-width: 1400px;
+    }
+
+    header {
+        padding-left: var(--espaco-5);
+        padding-right: var(--espaco-5);
+    }
+
+    header h1 {
+        font-size: 2.5rem;
+    }
+}

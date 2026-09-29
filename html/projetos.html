@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ONG Boa Demais da Conta - Projetos</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/script.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Projetos da ONG Boa Demais da Conta</h1>
+        <button class="menu-hamburguer" type="button" aria-label="Abrir menu" aria-expanded="false">
+            ☰
+        </button>
+        <nav class="menu-principal">
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li class="dropdown">
+                    <a href="projetos.html">Projetos</a>
+                    <ul class="submenu">
+                        <li><a href="#educacao">Educação Digital</a></li>
+                        <li><a href="#arrecadacao">Campanha de Arrecadação</a></li>
+                        <li><a href="#voluntariado">Voluntariado</a></li>
+                    </ul>
+                </li>
+                <li><a href="cadastro.html">Seja um colaborador</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Nossas iniciativas</h2>
+            <p>
+                Conheça alguns dos projetos desenvolvidos pela
+                ONG Boa Demais da Conta.
+            </p>
+        </section>
+
+        <section>
+            <h2>Projetos sociais</h2>
+
+            <div class="projetos-container">
+                <article class="projeto" id="educacao">
+                    <span class="badge">Educação</span>
+                    <h3>Educação Digital</h3>
+                    <p>
+                        Projeto destinado a oferecer conhecimentos
+                        básicos de tecnologia e informática para pessoas
+                        que possuem pouco acesso a recursos digitais.
+                    </p>
+                    <button
+                        type="button"
+                        onclick="mostrarMensagem('Educação Digital')"
+                    >
+                        Saiba mais
+                    </button>
+                </article>
+
+                <article class="projeto" id="arrecadacao">
+                    <span class="badge">Arrecadação</span>
+                    <h3>Campanha de Arrecadação</h3>
+                    <p>
+                        Ação destinada à arrecadação de alimentos,
+                        roupas e outros itens para famílias que
+                        necessitam de apoio.
+                    </p>
+                    <button
+                        type="button"
+                        onclick="mostrarMensagem('Campanha de Arrecadação')"
+                    >
+                        Saiba mais
+                    </button>
+                </article>
+
+                <article class="projeto" id="voluntariado">
+                    <span class="badge">Voluntariado</span>
+                    <h3>Voluntariado</h3>
+                    <p>
+                        Programa que conecta pessoas interessadas em
+                        ajudar com as diferentes atividades realizadas
+                        pela ONG.
+                    </p>
+                    <button
+                        type="button"
+                        onclick="mostrarMensagem('Voluntariado')"
+                    >
+                        Saiba mais
+                    </button>
+                </article>
+            </div>
+        </section>
+
+        <section>
+            <h2>Participe</h2>
+            <p>
+                Se você deseja contribuir com nossas iniciativas,
+                faça seu cadastro como colaborador.
+            </p>
+            <a href="cadastro.html">Quero participar</a>
+        </section>
+    </main>
+
+    <!-- Modal de informações -->
+    <div
+        class="modal"
+        id="modal-projeto"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-titulo"
+        hidden
+    >
+        <div class="modal-conteudo">
+            <button
+                class="modal-fechar"
+                type="button"
+                aria-label="Fechar modal"
+                onclick="fecharModal()"
+            >
+                &times;
+            </button>
+
+            <h2 id="modal-titulo">Informações do projeto</h2>
+            <p id="modal-texto"></p>
+
+            <button type="button" onclick="fecharModal()">
+                Fechar
+            </button>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div
+        class="toast"
+        id="toast"
+        role="status"
+        aria-live="polite"
+    >
+        Projeto selecionado com sucesso!
+    </div>
+
+    <footer>
+        <p>&copy; 2026 ONG Boa Demais da Conta. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>
