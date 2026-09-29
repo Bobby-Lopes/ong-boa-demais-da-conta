@@ -27,7 +27,10 @@ export function obterRotaAtual() {
 
 
 // Renderiza o conteúdo correspondente à rota
-export function renderizarPagina(rota) {
+export function renderizarPagina(
+    rota,
+    moverFoco = false
+) {
     if (!templates[rota]) {
         rota = "inicio";
     }
@@ -43,6 +46,10 @@ export function renderizarPagina(rota) {
     if (rota === "cadastro") {
         inicializarFormulario();
     }
+
+    if (moverFoco) {
+        conteudoPrincipal.focus();
+    }
 }
 
 
@@ -52,7 +59,9 @@ export function configurarRoteamento() {
         "click",
         function (evento) {
             const link =
-                evento.target.closest("[data-rota]");
+                evento.target.closest(
+                    "[data-rota]"
+                );
 
             if (!link) {
                 return;
@@ -60,11 +69,26 @@ export function configurarRoteamento() {
 
             evento.preventDefault();
 
-            const rota = link.dataset.rota;
+            const rota =
+                link.dataset.rota;
 
-            window.location.hash = rota;
-            renderizarPagina(rota);
+            const hashAtual =
+                window.location.hash.replace(
+                    "#",
+                    ""
+                );
+
             fecharMenu();
+
+            if (hashAtual === rota) {
+                renderizarPagina(
+                    rota,
+                    true
+                );
+            } else {
+                window.location.hash =
+                    rota;
+            }
         }
     );
 
@@ -72,7 +96,8 @@ export function configurarRoteamento() {
         "hashchange",
         function () {
             renderizarPagina(
-                obterRotaAtual()
+                obterRotaAtual(),
+                true
             );
         }
     );
