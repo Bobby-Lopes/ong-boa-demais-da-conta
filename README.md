@@ -32,12 +32,19 @@ O projeto utiliza:
 - **ES6 Modules** para separar as responsabilidades dos arquivos JavaScript;
 - **IMask** para aplicar máscaras nos campos de CPF, telefone e CEP;
 - **localStorage** para armazenar o rascunho do formulário e a preferência de tema;
-- **Git e GitHub** para versionamento e organização do desenvolvimento.
+- **Vite** para desenvolvimento, geração e otimização do build de produção;
+- **Node.js e npm** para execução dos scripts e gerenciamento das dependências de desenvolvimento;
+- **Git e GitHub** para versionamento e organização do desenvolvimento;
+- **GitHub Actions** para automação do processo de build e deploy;
+- **GitHub Pages** para publicação da versão de produção.
 
 ## Estrutura do projeto
 
 ```text
 Atividade 4-4/
+├── .github/
+│   └── workflows/
+│       └── deploy.yml
 ├── css/
 │   └── style.css
 ├── html/
@@ -45,7 +52,7 @@ Atividade 4-4/
 │   ├── projetos.html
 │   └── cadastro.html
 ├── images/
-│   └── voluntarios.jpg
+│   └── voluntarios.webp
 ├── js/
 │   ├── app.js
 │   ├── formulario.js
@@ -53,23 +60,53 @@ Atividade 4-4/
 │   ├── router.js
 │   ├── storage.js
 │   └── templates.js
+├── scripts/
+│   └── ajustar-build.js
+├── .gitignore
+├── package.json
+├── package-lock.json
+├── vite.config.js
 └── README.md
 ```
 
 Os arquivos JavaScript foram separados de acordo com suas responsabilidades. O `app.js` inicializa a aplicação, o `router.js` controla a navegação, o `templates.js` contém os templates utilizados pela SPA, o `formulario.js` controla o formulário, o `interface.js` gerencia elementos interativos e o `storage.js` concentra o acesso ao armazenamento local.
 
+O arquivo `vite.config.js` contém a configuração do Vite utilizada no build de produção. O script `ajustar-build.js` reorganiza o arquivo `index.html` gerado para que ele fique na raiz da pasta `dist`, estrutura utilizada na publicação pelo GitHub Pages.
+
 ## Como executar o projeto
 
-O projeto não utiliza instalação de pacotes ou processo de build.
+Para executar o projeto localmente é necessário possuir o Node.js instalado.
 
-Para executá-lo localmente:
+Após clonar ou baixar o repositório:
 
-1. Clone ou faça o download do repositório;
-2. Abra a pasta do projeto no Visual Studio Code;
-3. Abra o arquivo `html/index.html` em um navegador;
-4. Utilize o menu da aplicação para navegar entre as áreas disponíveis.
+1. Abra a pasta do projeto no Visual Studio Code;
+2. Execute `npm install` para instalar as dependências;
+3. Execute `npm run dev` para iniciar o ambiente de desenvolvimento;
+4. Acesse no navegador o endereço informado pelo Vite.
+
+Para gerar a versão de produção, utilize:
+
+```bash
+npm run build
+```
+
+O build otimizado será criado na pasta `dist`.
+
+Para testar localmente a versão de produção, utilize:
+
+```bash
+npm run preview
+```
 
 A biblioteca IMask é carregada externamente por CDN, portanto é necessária conexão com a internet para o carregamento dessa biblioteca.
+
+## Build e otimização
+
+O Vite é utilizado para gerar e otimizar os arquivos destinados ao ambiente de produção.
+
+Durante o processo de otimização, os arquivos HTML, CSS e JavaScript utilizados pela aplicação passaram de 41.738 bytes para 25.129 bytes após o build, representando uma redução aproximada de 39,8%.
+
+A imagem utilizada na página inicial também foi otimizada. O arquivo original em JPG, com resolução de 1168 × 784 pixels e 462.270 bytes, foi redimensionado para 876 × 588 pixels e convertido para WebP, passando a ocupar 306.740 bytes, uma redução aproximada de 33,6%.
 
 ## Acessibilidade
 
@@ -92,15 +129,32 @@ O projeto utiliza Git e GitHub para controle de versão.
 
 A branch `main` é utilizada para manter a versão estável do projeto, enquanto a `develop` concentra as alterações em desenvolvimento. Novas funcionalidades ou alterações são desenvolvidas em branches `feature/` criadas a partir da `develop`.
 
-Após a implementação e os testes, as alterações são integradas novamente à `develop` por meio de Pull Requests. Quando uma versão estiver pronta para lançamento, as alterações da `develop` podem ser integradas à `main`.
+Após a implementação e os testes, as alterações são integradas novamente à `develop` por meio de Pull Requests. Quando uma versão está pronta para lançamento, as alterações da `develop` são integradas à `main`.
 
 As mensagens de commit seguem o padrão **Conventional Commits**, utilizando identificadores como:
 
 - `feat:` para novas funcionalidades;
 - `docs:` para alterações na documentação;
-- `fix:` para correções de erros.
+- `fix:` para correções de erros;
+- `perf:` para otimizações de desempenho;
+- `ci:` para alterações relacionadas à integração e entrega contínua.
 
 O projeto também utiliza **Issues**, **Milestones** e **Pull Requests** no GitHub para registrar tarefas e acompanhar as alterações realizadas.
+
+## Deploy
+
+A aplicação está preparada para publicação no **GitHub Pages** por meio de um workflow do **GitHub Actions**.
+
+Quando uma versão é enviada para a branch `main`, o workflow executa automaticamente as etapas necessárias para preparar a publicação:
+
+1. Obtém o código do repositório;
+2. Configura o ambiente Node.js;
+3. Instala as dependências com `npm ci`;
+4. Executa o build de produção;
+5. Prepara os arquivos da pasta `dist`;
+6. Publica o artefato no GitHub Pages.
+
+O caminho base utilizado pelo Vite também foi configurado para o endereço do repositório no GitHub Pages.
 
 ## Responsividade
 
