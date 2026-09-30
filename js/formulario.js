@@ -6,11 +6,20 @@ import {
 
 // Inicializa as máscaras utilizando a biblioteca IMask
 function inicializarMascaras() {
-    const campoCpf = document.querySelector("#cpf");
-    const campoTelefone = document.querySelector("#telefone");
-    const campoCep = document.querySelector("#cep");
+    const campoCpf =
+        document.querySelector("#cpf");
 
-    if (!campoCpf || !campoTelefone || !campoCep) {
+    const campoTelefone =
+        document.querySelector("#telefone");
+
+    const campoCep =
+        document.querySelector("#cep");
+
+    if (
+        !campoCpf ||
+        !campoTelefone ||
+        !campoCep
+    ) {
         return;
     }
 
@@ -33,7 +42,11 @@ function limparErro(campo) {
     campo.classList.remove("campo-invalido");
     campo.classList.remove("campo-valido");
 
+    campo.removeAttribute("aria-invalid");
+    campo.removeAttribute("aria-describedby");
+
     const grupo = campo.parentElement;
+
     const mensagemErro =
         grupo.querySelector(".mensagem-erro");
 
@@ -49,13 +62,43 @@ function mostrarErro(campo, mensagem) {
 
     campo.classList.add("campo-invalido");
 
+    campo.setAttribute(
+        "aria-invalid",
+        "true"
+    );
+
     const mensagemErro =
         document.createElement("small");
 
-    mensagemErro.classList.add("mensagem-erro");
+    const idMensagem =
+        "erro-" + campo.id;
+
+    mensagemErro.id = idMensagem;
+    mensagemErro.classList.add(
+        "mensagem-erro"
+    );
+
     mensagemErro.textContent = mensagem;
 
-    campo.parentElement.appendChild(mensagemErro);
+    campo.setAttribute(
+        "aria-describedby",
+        idMensagem
+    );
+
+    campo.parentElement.appendChild(
+        mensagemErro
+    );
+}
+
+
+// Marca o campo como válido
+function marcarCampoValido(campo) {
+    campo.classList.add("campo-valido");
+
+    campo.setAttribute(
+        "aria-invalid",
+        "false"
+    );
 }
 
 
@@ -65,7 +108,10 @@ function validarCampo(campo) {
 
     limparErro(campo);
 
-    if (campo.required && valor === "") {
+    if (
+        campo.required &&
+        valor === ""
+    ) {
         mostrarErro(
             campo,
             "Este campo é obrigatório."
@@ -74,7 +120,10 @@ function validarCampo(campo) {
         return false;
     }
 
-    if (campo.id === "nome" && valor.length < 3) {
+    if (
+        campo.id === "nome" &&
+        valor.length < 3
+    ) {
         mostrarErro(
             campo,
             "Digite um nome com pelo menos 3 caracteres."
@@ -139,7 +188,7 @@ function validarCampo(campo) {
         }
     }
 
-    campo.classList.add("campo-valido");
+    marcarCampoValido(campo);
 
     return true;
 }
@@ -148,23 +197,33 @@ function validarCampo(campo) {
 // Restaura o rascunho recuperado do localStorage
 function restaurarRascunho() {
     const formulario =
-        document.querySelector("#form-cadastro");
+        document.querySelector(
+            "#form-cadastro"
+        );
 
     if (!formulario) {
         return;
     }
 
-    const rascunho = recuperarRascunho();
+    const rascunho =
+        recuperarRascunho();
 
     if (!rascunho) {
         return;
     }
 
-    formulario.nome.value = rascunho.nome || "";
-    formulario.email.value = rascunho.email || "";
+    formulario.nome.value =
+        rascunho.nome || "";
+
+    formulario.email.value =
+        rascunho.email || "";
+
     formulario.telefone.value =
         rascunho.telefone || "";
-    formulario.cep.value = rascunho.cep || "";
+
+    formulario.cep.value =
+        rascunho.cep || "";
+
     formulario.mensagem.value =
         rascunho.mensagem || "";
 }
@@ -173,7 +232,9 @@ function restaurarRascunho() {
 // Prepara o formulário depois que ele entra no DOM
 export function inicializarFormulario() {
     const formulario =
-        document.querySelector("#form-cadastro");
+        document.querySelector(
+            "#form-cadastro"
+        );
 
     if (!formulario) {
         return;
@@ -190,8 +251,11 @@ export function configurarEventosFormulario() {
         "input",
         function (evento) {
             const campo = evento.target;
+
             const formulario =
-                campo.closest("#form-cadastro");
+                campo.closest(
+                    "#form-cadastro"
+                );
 
             if (!formulario) {
                 return;
@@ -217,7 +281,9 @@ export function configurarEventosFormulario() {
 
             evento.preventDefault();
 
-            const formulario = evento.target;
+            const formulario =
+                evento.target;
+
             const campos =
                 formulario.querySelectorAll(
                     "input[required]"
@@ -229,15 +295,26 @@ export function configurarEventosFormulario() {
                 );
 
             let formularioValido = true;
+            let primeiroCampoInvalido = null;
 
-            campos.forEach(function (campo) {
-                const campoValido =
-                    validarCampo(campo);
+            campos.forEach(
+                function (campo) {
+                    const campoValido =
+                        validarCampo(campo);
 
-                if (!campoValido) {
-                    formularioValido = false;
+                    if (!campoValido) {
+                        formularioValido =
+                            false;
+
+                        if (
+                            !primeiroCampoInvalido
+                        ) {
+                            primeiroCampoInvalido =
+                                campo;
+                        }
+                    }
                 }
-            });
+            );
 
             if (!formularioValido) {
                 mensagemFormulario.textContent =
@@ -245,6 +322,10 @@ export function configurarEventosFormulario() {
 
                 mensagemFormulario.className =
                     "mensagem-formulario erro";
+
+                if (primeiroCampoInvalido) {
+                    primeiroCampoInvalido.focus();
+                }
 
                 return;
             }
