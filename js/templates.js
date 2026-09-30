@@ -1,3 +1,5 @@
+import imagemVoluntarios from "../images/voluntarios.webp";
+
 // Dados dos projetos
 const projetos = [
     {
@@ -70,7 +72,7 @@ export const templates = {
             <h2>Transformando vidas através da solidariedade e do Pão de Queijo</h2>
 
             <img
-                src="../images/voluntarios.jpg"
+                src="${imagemVoluntarios}"
                 alt="Voluntários da ONG Boa Demais da Conta entregando pacotes de pães de queijo em uma ação comunitária em uma comunidade pobre"
             >
 
